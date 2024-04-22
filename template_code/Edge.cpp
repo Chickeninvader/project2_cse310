@@ -16,6 +16,14 @@ int Edge::getWeight(){
     return this->weight;
 }
 
+int Edge::getStart() {
+    return this->startVert;
+}
+
+int Edge::getEnd(){
+    return this->endVert;
+}
+
 void Edge::setWeight(int newWeight){
     this->weight = newWeight;
 }

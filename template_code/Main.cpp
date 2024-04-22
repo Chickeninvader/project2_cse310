@@ -1,5 +1,5 @@
-#include "Edge.h"
 #include <iostream>
+#include "graph.h"
 
 int main(){
 
@@ -16,17 +16,21 @@ int main(){
         std::cout<<"Input not found!"<<std::endl;
         return NULL;
     }
+    Graph graph = Graph(numOfVertices, numOfEdges);
 
     while(!std::cin.eof()){
         int startVertice;
         int endVertice;
         std::cin >> startVertice;
         std::cin >> endVertice;
-        Edge* newEdge = new Edge(startVertice, endVertice);
-        // Here is where you load up the Graph object
+        graph.AddEdgeAndVertices(startVertice, endVertice);
     }
 
     // And here is where you start working on the three tasks
-
+    graph.UpdateVertices();
+    graph.PrintAdjacencyMatrix();
+    graph.PrintOddDegreeVertices();
+    graph.PrintShortestPath();
+    
     return 0;
 }
