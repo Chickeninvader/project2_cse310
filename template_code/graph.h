@@ -4,10 +4,12 @@
 #include "Vertex.h"
 #include "Edge.h"
 
+#include "Vertex.cpp"
+#include "Edge.cpp"
+
 class Graph{
 private:
     Vertex* vertices;
-    int** adjacencyMatrix;
     Edge* edges;
     int* verticesDegree;
     int countEdges;

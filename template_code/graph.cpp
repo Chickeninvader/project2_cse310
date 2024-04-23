@@ -16,6 +16,9 @@ Graph::Graph(int numOfVertices, int numOfEdges) {
 }
 
 void Graph::AddEdgeAndVertices(int startVertice, int endVertice) {
+    if (this->countEdges >= this->numOfEdges)    {
+        return;
+    }
     this->verticesDegree[startVertice]++;
     this->verticesDegree[endVertice]++;
     this->edges[this->countEdges] = Edge(startVertice, endVertice);
@@ -24,21 +27,35 @@ void Graph::AddEdgeAndVertices(int startVertice, int endVertice) {
 
 void Graph::UpdateVertices() {
     for (int idx = 0; idx < this->numOfVertices; idx++)    {
-        this->vertices[idx] = Vertex(idx, this->verticesDegree[idx]);
+        this->vertices[idx].setIndex(idx);
+        this->vertices[idx].setDegree(this->verticesDegree[idx]);
     }
+
     for (int idx = 0; idx < this->numOfEdges; idx++)    {
         this->vertices[this->edges[idx].getStart()].AddEdge(this->vertices[this->edges[idx].getEnd()]);
         this->vertices[this->edges[idx].getEnd()].AddEdge(this->vertices[this->edges[idx].getStart()]);
     }
+
+    // print info
+    for (int idx = 0; idx < this->numOfVertices; idx++)    {
+        std::cout << "vertex " << idx << " has degree equal " << this->verticesDegree[idx]
+        << " and its adjacent vertex" << std::endl;
+        for (int adjacentIdx = 0; adjacentIdx < this->vertices[idx].getDegree();adjacentIdx++) {
+            // if distance of the adjacent vertex of the chosen vertex is larger than the distance of the chosen
+            // vertex + 1 (weight of all the edge), then replace the distance and the previous vertex accordingly
+            std::cout << "vertex " << this->vertices[idx].GetAdjacentVertice()[adjacentIdx].getIndex() << std::endl;
+        }
+    }
 }
 
 void Graph::PrintAdjacencyMatrix() {
-    // TODO: construct matrix by iterating this->edges and print
+    int** adjacencyMatrix;
+    //TODO: construct matrix by iterating this->edges and print
+    //TODO: Deallocate adjacency matrix
 }
 
 void Graph::PrintOddDegreeVertices() {
     // TODO: get the odd degree vertices from this->verticesDegree and print
-    return;
 }
 
 void Graph::PrintShortestPath() {
@@ -67,7 +84,6 @@ void Graph::PrintShortestPath() {
         }
 
         // initially, we include startIdx and set the distance to 0
-        includeVertices[startIdx] = true;
         distance[startIdx] = 0;
 
         // Loop until all the vertices are considered in the algorithm
@@ -75,18 +91,17 @@ void Graph::PrintShortestPath() {
             // iterate all the vertices, find vertex has minimum distance and is not included in the includeVertices
             int min_distance = this->numOfVertices + 1;
             for (int idx = 0; idx < this->numOfVertices; idx++) {
-                if ((distance[idx] > min_distance) & (!includeVertices[idx])) {
+                if ((distance[idx] < min_distance) & (!includeVertices[idx])) {
                     min_distance = distance[idx];
                     chosenVertex = this->vertices[idx];
                 }
             }
 
-            // set chosen vertex to true so later we do not consider it
+            // set chosen vertex to true, so later we do not consider it
             includeVertices[chosenVertex.getIndex()] = true;
 
             // update distance of adjacent vertices
             for (int adjacentIdx = 0; adjacentIdx < chosenVertex.getDegree();adjacentIdx++) {
-
                 // if distance of the adjacent vertex of the chosen vertex is larger than the distance of the chosen
                 // vertex + 1 (weight of all the edge), then replace the distance and the previous vertex accordingly
                 if (distance[chosenVertex.GetAdjacentVertice()[adjacentIdx].getIndex()] >
@@ -95,18 +110,17 @@ void Graph::PrintShortestPath() {
                             distance[chosenVertex.getIndex()] + 1;
                     previousVertex[chosenVertex.GetAdjacentVertice()[adjacentIdx].getIndex()] = chosenVertex;
                 }
-
             }
         }
         // Check error: if not all vertices is included, there exist value in includeVertices is false
-        for (int idx = 0; idx <= this->numOfVertices; idx++)  {
+        for (int idx = 0; idx < this->numOfVertices; idx++)  {
             if (!includeVertices[idx])  {
                 throw std::invalid_argument( "the shortest path algorithm do not work properly" );
             }
         }
         // print result:
-        for (int idx = 0; idx <= this->numOfVertices; idx++)  {
-            std::cout << idx << ": " << distance[idx];
+        for (int idx = 0; idx < this->numOfVertices; idx++)  {
+            std::cout << idx << ": " << distance[idx] << std::endl;
         }
     }
     delete[] distance;
@@ -119,7 +133,5 @@ Graph::~Graph()   {
     delete[] this->vertices;
     delete[] this->edges;
     delete[] this->verticesDegree;
-
-    //TODO: Deallocate adjacency matrix
 }
 

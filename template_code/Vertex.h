@@ -10,12 +10,11 @@ class Vertex{
     public:
         Vertex();
         ~Vertex();
-        Vertex(int, int);
         int getIndex();
         int getDegree();
         void setIndex(int);
         void setDegree(int);
-        void AddEdge(Vertex);
+        void AddEdge(Vertex&);
         Vertex* GetAdjacentVertice();
 };
 

@@ -4,11 +4,8 @@
 Vertex::Vertex() {
     this->index = -1;
     this->degree = -1;
-}
-Vertex::Vertex(int idx, int numOfAdjacentVertices){
-    this->index = idx;
-    this->degree = numOfAdjacentVertices;
-    this->adjacentVertices = new Vertex[numOfAdjacentVertices];
+    this->adjacentVertices = nullptr;
+    this->countVertices = 0;
 }
 
 int Vertex::getIndex(){
@@ -25,14 +22,19 @@ void Vertex::setIndex(int index){
 
 void Vertex::setDegree(int deg){
     this->degree = deg;
+    this->adjacentVertices = new Vertex[deg];
+    this->countVertices = deg - 1;
 }
 
-void Vertex::AddEdge(Vertex vertex) {
+void Vertex::AddEdge(Vertex &vertex) {
     if (this->countVertices < 0)    {
         throw std::invalid_argument( "num edge and num degree is not match" );
     }
-    this->countVertices --;
+    if (vertex.getIndex() == -1)    {
+        throw std::invalid_argument( "wrong vertex data" );
+    }
     this->adjacentVertices[this->countVertices] = vertex;
+    this->countVertices --;
 }
 
 Vertex* Vertex::GetAdjacentVertice()    {
