@@ -124,8 +124,8 @@ void Graph::PrintShortestPath() {
         }
     }
     delete[] distance;
-    delete[] previousVertex;
     delete[] includeVertices;
+    delete[] previousVertex;
 }
 
 Graph::~Graph()   {

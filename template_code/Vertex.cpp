@@ -42,6 +42,6 @@ Vertex* Vertex::GetAdjacentVertice()    {
 }
 
 Vertex::~Vertex()   {
-    delete[] this->adjacentVertices;
+//    delete[] this->adjacentVertices;
 }
 
