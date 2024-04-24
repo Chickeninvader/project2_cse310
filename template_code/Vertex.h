@@ -5,17 +5,16 @@ class Vertex{
     private:
        int index;
        int degree;
-       Vertex* adjacentVertices;
+       int adjacentVerticesIdx[1000];
        int countVertices;
     public:
         Vertex();
-        ~Vertex();
         int getIndex();
         int getDegree();
         void setIndex(int);
         void setDegree(int);
-        void AddEdge(Vertex&);
-        Vertex* GetAdjacentVertice();
+        void AddEdge(Vertex);
+        int GetAdjacentVerticeIdx(int);
 };
 
 

@@ -43,7 +43,7 @@ void Graph::UpdateVertices() {
         for (int adjacentIdx = 0; adjacentIdx < this->vertices[idx].getDegree();adjacentIdx++) {
             // if distance of the adjacent vertex of the chosen vertex is larger than the distance of the chosen
             // vertex + 1 (weight of all the edge), then replace the distance and the previous vertex accordingly
-            std::cout << "vertex " << this->vertices[idx].GetAdjacentVertice()[adjacentIdx].getIndex() << std::endl;
+            std::cout << "vertex " << this->vertices[idx].GetAdjacentVerticeIdx(adjacentIdx) << std::endl;
         }
     }
 }
@@ -65,7 +65,7 @@ void Graph::PrintShortestPath() {
     // chosenVertex: temp vertex adding to the includeVertices
     int* distance = new int[this->numOfVertices];
     bool* includeVertices = new bool[this->numOfVertices];
-    Vertex* previousVertex = new Vertex[this->numOfVertices];
+    int* previousVertexIdx = new int[this->numOfVertices];
     Vertex chosenVertex = Vertex();
 
     for (int startIdx = 0; startIdx < this->numOfVertices; startIdx++) {
@@ -79,7 +79,7 @@ void Graph::PrintShortestPath() {
         // and includeVertices is false, meaning no vertex is chosen for the algorithm
         for (int idx = 0; idx < this->numOfVertices; idx++) {
             distance[idx] = this->numOfVertices + 1;
-            previousVertex[idx] = Vertex();
+            previousVertexIdx[idx] = -1;
             includeVertices[idx] = false;
         }
 
@@ -104,11 +104,11 @@ void Graph::PrintShortestPath() {
             for (int adjacentIdx = 0; adjacentIdx < chosenVertex.getDegree();adjacentIdx++) {
                 // if distance of the adjacent vertex of the chosen vertex is larger than the distance of the chosen
                 // vertex + 1 (weight of all the edge), then replace the distance and the previous vertex accordingly
-                if (distance[chosenVertex.GetAdjacentVertice()[adjacentIdx].getIndex()] >
+                if (distance[chosenVertex.GetAdjacentVerticeIdx(adjacentIdx)] >
                 distance[chosenVertex.getIndex()] + 1) {
-                    distance[chosenVertex.GetAdjacentVertice()[adjacentIdx].getIndex()] =
+                    distance[chosenVertex.GetAdjacentVerticeIdx(adjacentIdx)] =
                             distance[chosenVertex.getIndex()] + 1;
-                    previousVertex[chosenVertex.GetAdjacentVertice()[adjacentIdx].getIndex()] = chosenVertex;
+                    previousVertexIdx[chosenVertex.GetAdjacentVerticeIdx(adjacentIdx)] = chosenVertex.getIndex();
                 }
             }
         }
@@ -125,11 +125,10 @@ void Graph::PrintShortestPath() {
     }
     delete[] distance;
     delete[] includeVertices;
-    delete[] previousVertex;
+    delete[] previousVertexIdx;
 }
 
 Graph::~Graph()   {
-
     delete[] this->vertices;
     delete[] this->edges;
     delete[] this->verticesDegree;

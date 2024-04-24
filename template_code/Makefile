@@ -8,7 +8,7 @@ Vertex.o: Vertex.h Vertex.cpp
 		g++ -g -Wall -c Vertex.cpp
 
 Graph.o: graph.h graph.cpp
-		g++ -g -Wall -c Graph.cpp
+		g++ -g -Wall -c graph.cpp
 
 Main.o: Main.cpp
 		g++ -g -Wall -c Main.cpp
