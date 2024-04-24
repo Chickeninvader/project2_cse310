@@ -2,7 +2,7 @@
 // Created by Khoa Vo  on 4/21/24.
 //
 
-#include "graph.h"
+#include "Graph.h"
 #include "Vertex.h"
 #include <iostream>
 

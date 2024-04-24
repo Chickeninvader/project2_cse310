@@ -1,5 +1,5 @@
 #include <iostream>
-#include "graph.h"
+#include "Graph.h"
 #include <fstream> // For file input
 
 int main(){
