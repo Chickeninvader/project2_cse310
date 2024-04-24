@@ -13,6 +13,9 @@ Graph::Graph(int numOfVertices, int numOfEdges) {
     this->verticesDegree = new int[numOfVertices];
     this->numOfVertices = numOfVertices;
     this->numOfEdges = numOfEdges;
+    for (int idx = 0; idx < numOfVertices; idx++)   {
+        this->verticesDegree[idx] = 0;
+    }
 }
 
 void Graph::AddEdgeAndVertices(int startVertice, int endVertice) {
@@ -34,17 +37,6 @@ void Graph::UpdateVertices() {
     for (int idx = 0; idx < this->numOfEdges; idx++)    {
         this->vertices[this->edges[idx].getStart()].AddEdge(this->vertices[this->edges[idx].getEnd()]);
         this->vertices[this->edges[idx].getEnd()].AddEdge(this->vertices[this->edges[idx].getStart()]);
-    }
-
-    // print info
-    for (int idx = 0; idx < this->numOfVertices; idx++)    {
-        std::cout << "vertex " << idx << " has degree equal " << this->verticesDegree[idx]
-        << " and its adjacent vertex" << std::endl;
-        for (int adjacentIdx = 0; adjacentIdx < this->vertices[idx].getDegree();adjacentIdx++) {
-            // if distance of the adjacent vertex of the chosen vertex is larger than the distance of the chosen
-            // vertex + 1 (weight of all the edge), then replace the distance and the previous vertex accordingly
-            std::cout << "vertex " << this->vertices[idx].GetAdjacentVerticeIdx(adjacentIdx) << std::endl;
-        }
     }
 }
 
@@ -73,7 +65,7 @@ void Graph::PrintShortestPath() {
         if (this->verticesDegree[startIdx] % 2 == 0) {
             continue;
         }
-        std::cout << "Single source shortest path lengths from node " << startIdx << std::endl;
+        std::cout << "Single source shortest path lengths from node " << startIdx + 1 << std::endl;
 
         // Set distance to be num vertex + 1, which similar to inf in this problem. PreviousVertex is set to default,
         // and includeVertices is false, meaning no vertex is chosen for the algorithm
@@ -120,7 +112,7 @@ void Graph::PrintShortestPath() {
         }
         // print result:
         for (int idx = 0; idx < this->numOfVertices; idx++)  {
-            std::cout << idx << ": " << distance[idx] << std::endl;
+            std::cout << idx + 1 << ": " << distance[idx] << std::endl;
         }
     }
     delete[] distance;

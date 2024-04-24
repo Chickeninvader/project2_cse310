@@ -24,7 +24,7 @@ int main(){
         int endVertice;
         std::cin >> startVertice;
         std::cin >> endVertice;
-        graph.AddEdgeAndVertices(startVertice, endVertice);
+        graph.AddEdgeAndVertices(startVertice - 1, endVertice - 1);
     }
 
 //    std::string filename;
