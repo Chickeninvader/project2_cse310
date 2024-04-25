@@ -44,10 +44,45 @@ void Graph::PrintAdjacencyMatrix() {
     int** adjacencyMatrix;
     //TODO: construct matrix by iterating this->edges and print
     //TODO: Deallocate adjacency matrix
-}
+    // Iterate through edges and mark connected vertices as 1 in the matrix
+    for (int i = 0; i < this->countEdges; ++i) {
+        int start = this->edges[i].getStart();
+        int end = this->edges[i].getEnd();
+        adjacencyMatrix[start][end] = 1;
+        adjacencyMatrix[end][start] = 1; // Since it's an undirected graph
+    }
+    
+    // Print the adjacency matrix
+    std::cout << "The adjacency matrix of G:\n";
+    for (int i = 0; i < this->numOfVertices; ++i) {
+        for (int j = 0; j < this->numOfVertices; ++j) {
+            std::cout << adjacencyMatrix[i][j] << " ";
+        }
+            std::cout << std::endl;
+    }
+
+    // Deallocate memory used for the adjacency matrix
+    for (int i = 0; i < this->numOfVertices; ++i) {
+        delete[] adjacencyMatrix[i];
+    }
+        delete[] adjacencyMatrix;
+    }
 
 void Graph::PrintOddDegreeVertices() {
     // TODO: get the odd degree vertices from this->verticesDegree and print
+    std::cout << "The odd degree vertices in G:\n";
+    std::cout << "O = { ";
+    bool isFirstVertex = true;
+    for (int i = 0; i < this->numOfVertices; ++i) {
+        if (this->verticesDegree[i] % 2 != 0) {
+            if (isFirstVertex) {
+                isFirstVertex = false;
+            } else {
+                std::cout << ", ";
+            }
+        std::cout << i + 1; // Print vertex index starting from 1 
+    }
+    std::cout << " }\n";
 }
 
 void Graph::PrintShortestPath() {
