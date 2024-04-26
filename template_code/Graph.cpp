@@ -41,10 +41,18 @@ void Graph::UpdateVertices() {
 }
 
 void Graph::PrintAdjacencyMatrix() {
-    int** adjacencyMatrix;
-    //TODO: construct matrix by iterating this->edges and print
-    //TODO: Deallocate adjacency matrix
-    // Iterate through edges and mark connected vertices as 1 in the matrix
+    int** adjacencyMatrix = new int* [this->numOfVertices];
+
+    for (int i = 0; i < this->numOfVertices; ++i) {
+        adjacencyMatrix[i] = new int[this->numOfVertices]; // Allocate inner arrays
+    }
+
+    // Initialized matrix
+    for (int i = 0; i < this->numOfVertices; ++i) {
+        for (int j = 0; j < this->numOfVertices; ++j) {
+            adjacencyMatrix[i][j] = 0;
+        }
+    }
     for (int i = 0; i < this->countEdges; ++i) {
         int start = this->edges[i].getStart();
         int end = this->edges[i].getEnd();
@@ -65,8 +73,8 @@ void Graph::PrintAdjacencyMatrix() {
     for (int i = 0; i < this->numOfVertices; ++i) {
         delete[] adjacencyMatrix[i];
     }
-        delete[] adjacencyMatrix;
-    }
+    delete[] adjacencyMatrix;
+}
 
 void Graph::PrintOddDegreeVertices() {
     // TODO: get the odd degree vertices from this->verticesDegree and print
@@ -80,9 +88,10 @@ void Graph::PrintOddDegreeVertices() {
             } else {
                 std::cout << ", ";
             }
-        std::cout << i + 1; // Print vertex index starting from 1 
+            std::cout << i + 1; // Print vertex index starting from 1
+        }
+        std::cout << " }\n";
     }
-    std::cout << " }\n";
 }
 
 void Graph::PrintShortestPath() {
