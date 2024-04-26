@@ -4,3 +4,9 @@
 /template_code/dijkstra
 /demo
 /Main
+
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/misc.xml
+
+.vscode/*.json
