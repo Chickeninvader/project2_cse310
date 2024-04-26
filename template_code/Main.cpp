@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Graph.h"
-#include <fstream> // For file input
 
 int main(){
 
@@ -26,40 +25,6 @@ int main(){
         std::cin >> endVertice;
         graph.AddEdgeAndVertices(startVertice - 1, endVertice - 1);
     }
-
-//    std::string filename;
-//
-//    // Prompt for user input
-//    std::cout << "Enter the path to the text file containing graph data: ";
-//    std::getline(std::cin, filename);
-//
-//    // Open the file for reading
-//    std::ifstream inputFile(filename);
-//    if (!inputFile.is_open()) {
-//        std::cerr << "Error: Could not open file '" << filename << "'" << std::endl;
-//        return 1; // Indicate error
-//    }
-//
-//    // Read number of vertices and edges from the file
-//    int numOfVertices;
-//    int numOfEdges;
-//    inputFile >> numOfVertices >> numOfEdges;
-//
-//    // Create the graph object
-//    Graph graph = Graph(numOfVertices, numOfEdges);
-//
-//    // Read edge connections from the file
-//    while (inputFile >> std::skipws) { // Skip whitespace before each line
-//        int startVertice;
-//        int endVertice;
-//        inputFile >> startVertice >> endVertice;
-//
-//        // Add edge to the graph
-//        graph.AddEdgeAndVertices(startVertice - 1, endVertice - 1);
-//    }
-//
-//    // Close the file
-//    inputFile.close();
 
     // And here is where you start working on the three tasks
     graph.UpdateVertices();

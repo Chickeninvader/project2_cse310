@@ -1,7 +1,3 @@
-//
-// Created by Khoa Vo  on 4/21/24.
-//
-
 #include "Graph.h"
 #include "Vertex.h"
 #include <iostream>
@@ -86,12 +82,12 @@ void Graph::PrintOddDegreeVertices() {
             if (isFirstVertex) {
                 isFirstVertex = false;
             } else {
-                std::cout << ", ";
+                std::cout << " ";
             }
             std::cout << i + 1; // Print vertex index starting from 1
         }
-        std::cout << " }\n";
     }
+    std::cout << " }\n";
 }
 
 void Graph::PrintShortestPath() {
