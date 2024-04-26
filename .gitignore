@@ -9,4 +9,8 @@
 .idea/vcs.xml
 .idea/misc.xml
 
-.vscode/*.json
+.vscode/launch.json
+.vscode/c_cpp_properties.json
+.vscode/settings.json
+
+/.idea/
